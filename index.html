@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow" data-publish>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FrameHouseHub&nbsp;– проектирование домов и&nbsp;технадзор</title>
+<meta name="description" content="Архитектурное бюро FrameHouseHub: проекты загородных домов и строительный контроль. Демо-версия сайта.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2326292E'/%3E%3Cpath d='M7 25V14l9-7 9 7v11' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3Cpath d='M16 25v-8' stroke='%232F55D4' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFFFF;
+  --paper:#F3F4F5;
+  --graphite:#26292E;
+  --graphite-2:#3A3E45;
+  --concrete:#646A72;
+  --line:#D6D9DD;
+  --accent:#2F55D4;
+  --accent-dark:#2443AE;
+  --head:68px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--head) + 16px)}
+body{background:var(--white);color:var(--graphite);font:400 17px/1.6 'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:'Jost',sans-serif;font-weight:500;line-height:1.08;letter-spacing:-.015em}
+h1{font-size:clamp(40px,5.6vw,76px)}
+h2{font-size:clamp(30px,3.6vw,48px)}
+h3{font-size:22px;line-height:1.2}
+p{max-width:62ch}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.muted{color:var(--concrete)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* кнопки */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;border:1px solid var(--accent);border-radius:2px;background:var(--accent);color:#fff;font:500 16px 'IBM Plex Sans',sans-serif;text-decoration:none;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s}
+.btn:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+.btn--ghost{background:transparent;color:var(--graphite);border-color:var(--graphite)}
+.btn--ghost:hover{background:var(--graphite);color:#fff;border-color:var(--graphite)}
+.btn--light{background:#fff;color:var(--graphite);border-color:#fff}
+.btn--light:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* плашка демо */
+.demo-for{display:flex;align-items:center;justify-content:center;gap:10px;min-height:40px;padding:6px 16px;background:var(--paper);border-bottom:1px solid var(--line);font-size:14px;color:var(--concrete);text-align:center}
+.demo-for img{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:none}
+.demo-for b{color:var(--graphite);font-weight:500}
+
+/* шапка */
+.head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.head .wrap{display:flex;align-items:center;gap:32px;height:var(--head)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 20px 'Jost',sans-serif;letter-spacing:-.01em;flex:none}
+.logo svg{width:30px;height:30px}
+.logo span{color:var(--concrete);font-weight:400}
+.nav{display:flex;gap:26px;margin-left:auto}
+.nav a{text-decoration:none;font-size:15px;color:var(--graphite-2);padding:6px 0;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--graphite);border-bottom-color:var(--accent)}
+.head .btn{min-height:44px;padding:0 20px;font-size:15px}
+.nav__cta{display:none}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line);background:#fff;border-radius:2px;cursor:pointer}
+.burger span{display:block;width:18px;height:1.5px;background:var(--graphite);margin:4px auto}
+
+/* страницы */
+.view{display:none}
+.view.is-on{display:block}
+
+/* ГЛАВНАЯ: сплит */
+.split{display:flex;height:calc(100svh - var(--head) - 40px);min-height:560px;background:var(--graphite)}
+.half{position:relative;flex:1 1 0;overflow:hidden;color:#fff;text-decoration:none;display:flex;flex-direction:column;justify-content:flex-end;padding:56px clamp(24px,4vw,64px);transition:flex-grow .6s cubic-bezier(.2,.7,.2,1)}
+.half__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .6s}
+.half::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,41,46,.55) 0%,rgba(38,41,46,0) 24%,rgba(38,41,46,0) 42%,rgba(38,41,46,.88) 100%);transition:background-color .6s}
+.half > h2,.half > p,.half > .btn{position:relative;z-index:2}
+.half__axis,.dim{z-index:2}
+.half + .half{border-left:1px solid rgba(255,255,255,.35)}
+.half__axis{position:absolute;top:28px;left:clamp(24px,4vw,64px);display:flex;align-items:center;gap:14px;font:400 13px 'IBM Plex Mono',monospace;color:rgba(255,255,255,.85)}
+.half__axis i{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.8);border-radius:50%;font-style:normal;font-size:14px}
+.dim{position:absolute;left:clamp(24px,4vw,64px);right:clamp(24px,4vw,64px);top:84px;height:14px;border-left:1px solid rgba(255,255,255,.7);border-right:1px solid rgba(255,255,255,.7)}
+.dim::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid rgba(255,255,255,.7)}
+.dim span{position:absolute;left:50%;top:-22px;transform:translateX(-50%);font:400 12px 'IBM Plex Mono',monospace;color:rgba(255,255,255,.85);background:transparent}
+.half h2{font-size:clamp(34px,3.8vw,56px);max-width:12ch;margin-bottom:16px}
+.half p{color:rgba(255,255,255,.86);max-width:40ch;margin-bottom:28px}
+.half .btn{align-self:flex-start}
+@media (hover:hover){
+  .split:hover .half{flex-grow:.82}
+  .split .half:hover{flex-grow:1.18}
+  .half:hover .half__bg{transform:scale(1.07)}
+  .split:hover .half:not(:hover)::after{background-color:rgba(38,41,46,.45)}
+  .half:hover .btn--light{background:var(--accent);color:#fff;border-color:var(--accent)}
+}
+
+/* внутренние страницы: первый экран */
+.intro{display:grid;grid-template-columns:1.05fr .95fr;min-height:calc(100svh - var(--head) - 40px);border-bottom:1px solid var(--line)}
+.intro__text{display:flex;flex-direction:column;justify-content:center;padding:72px clamp(24px,5vw,80px) 72px max(32px,calc((100vw - 1240px)/2 + 32px))}
+.crumb{font-size:14px;color:var(--concrete);margin-bottom:28px}
+.crumb a{text-decoration:none;border-bottom:1px solid var(--line)}
+.intro h1{max-width:14ch;margin-bottom:24px}
+.intro p{color:var(--concrete);font-size:19px;margin-bottom:32px;max-width:46ch}
+.intro__btns{display:flex;flex-wrap:wrap;gap:12px}
+.intro__img{position:relative;overflow:hidden;background:var(--paper)}
+.intro__img img{width:100%;height:100%;object-fit:cover}
+.gains{list-style:none;display:grid;gap:14px;margin:0 0 36px}
+.gains li{position:relative;padding-left:30px;max-width:46ch}
+.gains li::before{content:"";position:absolute;left:0;top:.75em;width:16px;border-top:2px solid var(--accent)}
+
+/* секции */
+.sec{padding:112px 0}
+.sec--paper{background:var(--paper)}
+.sec__head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:56px}
+.sec__head p{color:var(--concrete)}
+.note{display:inline-block;margin-top:14px;font-size:14px;color:var(--concrete);border-left:2px solid var(--accent);padding-left:12px}
+
+/* тарифы: таблица-чертёж, а не россыпь карточек */
+.tariffs{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);border-top:1px solid var(--graphite);border-left:1px solid var(--line)}
+.tariff{display:flex;flex-direction:column;padding:32px 28px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--white)}
+.tariff--main{background:var(--graphite);color:#fff;border-color:var(--graphite)}
+.tariff--main .tariff__list li{color:rgba(255,255,255,.82)}
+.tariff--main .tariff__meta{border-color:rgba(255,255,255,.25)}
+.tariff--main .tariff__meta dt{color:rgba(255,255,255,.6)}
+.tariff__code{font:400 13px 'IBM Plex Mono',monospace;color:var(--concrete);margin-bottom:22px}
+.tariff--main .tariff__code{color:rgba(255,255,255,.6)}
+.tariff h3{margin-bottom:18px;min-height:2.4em}
+.tariff__list{list-style:none;display:grid;gap:8px;font-size:15px;margin-bottom:28px}
+.tariff__list li{position:relative;padding-left:18px;color:var(--concrete)}
+.tariff__list li::before{content:"";position:absolute;left:0;top:.72em;width:8px;border-top:1px solid currentColor}
+.tariff__meta{margin-top:auto;display:grid;gap:10px;padding-top:20px;border-top:1px solid var(--line);margin-bottom:24px}
+.tariff__meta div{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.tariff__meta dt{color:var(--concrete)}
+.tariff__meta dd{font-weight:500;text-align:right}
+.tariff__price{white-space:nowrap;font:500 26px 'Jost',sans-serif!important}
+.tariff .btn{width:100%}
+.tariff--main .btn{background:#fff;color:var(--graphite);border-color:#fff}
+.tariff--main .btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* портфолио */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.filters button{min-height:42px;padding:0 18px;border:1px solid var(--line);background:#fff;border-radius:2px;font:400 15px 'IBM Plex Sans',sans-serif;color:var(--graphite);cursor:pointer;transition:border-color .2s,background-color .2s,color .2s}
+.filters button[aria-pressed="true"]{background:var(--graphite);border-color:var(--graphite);color:#fff}
+.works{display:grid;grid-template-columns:1.4fr 1fr;grid-auto-rows:auto;gap:24px}
+.work{display:block;padding:0;text-align:left;border:0;background:none;cursor:pointer;font:inherit;color:inherit}
+.work:first-child{grid-row:span 2}
+.work__img{overflow:hidden;background:var(--paper);aspect-ratio:4/3}
+.work:first-child .work__img{aspect-ratio:auto;height:calc(100% - 92px)}
+.work__img img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.work:hover .work__img img{transform:scale(1.04)}
+.work__cap{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0 0}
+.work__cap h3{font-size:22px}
+.work__cap span{font-size:15px;color:var(--concrete);white-space:nowrap}
+.work[hidden]{display:none}
+
+/* разборы выездов */
+.cases{display:grid;gap:40px}
+.case{display:grid;grid-template-columns:.9fr 1.1fr;background:#fff;border:1px solid var(--line)}
+.case__img{position:relative;overflow:hidden;min-height:340px}
+.case__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mark{position:absolute;border:2px solid var(--accent);border-radius:50%}
+.mark b{position:absolute;right:-14px;top:-14px;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font:500 13px 'IBM Plex Sans',sans-serif}
+.case__body{padding:36px 40px}
+.case__tag{font-size:14px;color:var(--concrete);margin-bottom:10px}
+.case h3{font-size:26px;margin-bottom:24px}
+.case dl{display:grid;grid-template-columns:150px 1fr;gap:14px 24px;font-size:15px}
+.case dt{color:var(--concrete)}
+.case dd ol{padding-left:18px;display:grid;gap:6px}
+.case dd ol li::marker{color:var(--accent);font-weight:600}
+.norm{font-family:'IBM Plex Mono',monospace;font-size:13.5px}
+.case__result{grid-column:1/-1;padding:16px 0 0;border-top:1px solid var(--line);margin-top:6px;font-weight:500}
+
+/* контакты */
+.contacts{display:grid;grid-template-columns:.85fr 1.15fr;gap:72px;align-items:start}
+.contacts h1{font-size:clamp(40px,5vw,64px);margin-bottom:24px}
+.c-list{display:grid;gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.c-list div{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-size:16px}
+.c-list dt{color:var(--concrete)}
+.slot{color:var(--concrete);border-bottom:1px dashed var(--line)}
+.msgs{display:flex;flex-wrap:wrap;gap:10px}
+.msgs a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:2px;text-decoration:none;font-size:15px;transition:border-color .2s}
+.msgs a:hover{border-color:var(--graphite)}
+
+/* форма */
+.form{display:grid;gap:18px;background:var(--paper);padding:40px;border-top:2px solid var(--graphite)}
+.form h2{font-size:30px;margin-bottom:4px}
+.field{display:grid;gap:6px}
+.field label,.field legend{font-size:14px;color:var(--concrete)}
+.field input,.field textarea{width:100%;min-height:52px;padding:12px 16px;border:1px solid var(--line);border-radius:2px;background:#fff;font:400 16px 'IBM Plex Sans',sans-serif;color:var(--graphite)}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+fieldset.field{border:0}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:2px;background:#fff;margin-top:6px}
+.seg label{position:relative;display:grid;place-items:center;min-height:50px;padding:0 10px;text-align:center;font-size:15px;color:var(--graphite);cursor:pointer}
+.seg label + label{border-left:1px solid var(--line)}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--graphite);color:#fff}
+.seg label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:-2px}
+.agree{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--concrete)}
+.agree input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent);flex:none}
+.form .btn{width:100%}
+.form__ok{display:none;padding:18px;background:#fff;border-left:2px solid var(--accent)}
+.form.is-sent .form__ok{display:block}
+
+/* поп-ап */
+dialog{border:0;padding:0;max-width:520px;width:calc(100% - 32px);margin:auto;background:transparent}
+dialog::backdrop{background:rgba(38,41,46,.6)}
+dialog .form{position:relative;background:#fff}
+.x{position:absolute;right:14px;top:14px;width:40px;height:40px;border:0;background:none;font-size:26px;line-height:1;color:var(--graphite);cursor:pointer}
+.proj{max-width:980px}
+.proj__box{position:relative;background:#fff;display:grid;grid-template-columns:1.25fr 1fr}
+.proj__media{background:var(--paper);display:grid;grid-template-rows:1fr auto}
+.proj__stage{aspect-ratio:4/3;overflow:hidden;display:grid;place-items:center;background:#fff}
+.proj__stage img,.proj__stage svg{width:100%;height:100%;object-fit:cover}
+.proj__tabs{display:flex;border-top:1px solid var(--line)}
+.proj__tabs button{flex:1;min-height:46px;border:0;background:var(--paper);font:400 14px 'IBM Plex Sans',sans-serif;cursor:pointer;color:var(--concrete)}
+.proj__tabs button + button{border-left:1px solid var(--line)}
+.proj__tabs button[aria-selected="true"]{background:#fff;color:var(--graphite);box-shadow:inset 0 2px 0 var(--accent)}
+.proj__info{padding:40px 32px 32px;display:flex;flex-direction:column}
+.proj__info h3{font-size:28px;margin-bottom:20px}
+.proj__info dl{display:grid;gap:0;border-top:1px solid var(--line);margin-bottom:28px}
+.proj__info dl div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
+.proj__info dt{color:var(--concrete)}
+.proj__info .btn{margin-top:auto}
+
+/* подвал */
+.foot{background:var(--graphite);color:rgba(255,255,255,.75);padding:64px 0 32px;font-size:15px}
+.foot .logo{color:#fff}
+.foot .logo span{color:rgba(255,255,255,.55)}
+.foot__top{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.15)}
+.foot h4{font:500 15px 'IBM Plex Sans',sans-serif;color:#fff;margin-bottom:14px}
+.foot ul{list-style:none;display:grid;gap:8px}
+.foot a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25)}
+.foot .logo,.foot .soc a{border-bottom:0}.foot .soc a{border:1px solid rgba(255,255,255,.3)}
+.foot a:hover{color:#fff;border-color:#fff}
+.soc{display:flex;gap:10px;margin-top:22px}
+.soc a{display:grid;place-items:center;width:44px;height:44px;border:1px solid rgba(255,255,255,.3);border-radius:2px}
+.soc a:hover{background:#fff;color:var(--graphite)}
+.soc svg{width:20px;height:20px;fill:currentColor}
+.foot__bottom{display:flex;justify-content:space-between;gap:16px;padding-top:24px;font-size:14px;color:rgba(255,255,255,.5)}
+
+/* адаптив */
+@media (max-width:1100px){
+  .nav{gap:18px}.nav a{font-size:14px}
+  .tariffs{--cols:2!important}
+}
+@media (max-width:960px){
+  :root{--head:60px}
+  .nav,.head .btn{display:none}
+  .burger{display:block}
+  .head.is-open .nav{display:flex;position:absolute;left:0;right:0;top:var(--head);flex-direction:column;gap:0;background:#fff;border-bottom:1px solid var(--line);padding:8px 24px 20px}
+  .head.is-open .nav a{padding:14px 0;font-size:17px;border-bottom:1px solid var(--line)}
+  .head.is-open .nav .nav__cta{display:inline-flex;margin-top:16px}
+  .split{flex-direction:column;height:auto;min-height:0}
+  .half{min-height:max(460px,calc((100svh - var(--head) - 40px)/2));padding:96px 24px 32px}
+  .half::after{background:linear-gradient(180deg,rgba(38,41,46,.55) 0%,rgba(38,41,46,.7) 45%,rgba(38,41,46,.9) 100%)}
+  .half + .half{border-left:0;border-top:1px solid rgba(255,255,255,.35)}
+  .half h2{font-size:34px;margin-bottom:10px}
+  .half p{margin-bottom:20px;font-size:16px}
+  .dim{display:none}
+  .half__axis{top:20px}
+  .intro{grid-template-columns:1fr;min-height:0}
+  .intro__img{order:-1;aspect-ratio:4/3}
+  .intro__text{padding:40px 24px 56px}
+  .sec{padding:72px 0}
+  .sec__head{grid-template-columns:1fr;gap:16px;margin-bottom:36px}
+  .works{grid-template-columns:1fr}
+  .work:first-child{grid-row:auto}
+  .work:first-child .work__img{aspect-ratio:4/3;height:auto}
+  .case{grid-template-columns:1fr}
+  .case__img{min-height:0;aspect-ratio:4/3}
+  .case__body{padding:28px 22px}
+  .case dl{grid-template-columns:1fr;gap:4px}
+  .case dd{margin-bottom:12px}
+  .contacts{grid-template-columns:1fr;gap:40px}
+  .proj__box{grid-template-columns:1fr}
+  .proj__info{padding:24px}
+  .foot__top{grid-template-columns:1fr;gap:32px}
+  .foot__bottom{flex-direction:column}
+}
+@media (max-width:600px){
+  .wrap{padding:0 20px}
+  .tariffs{--cols:1!important}
+  .tariff h3{min-height:0}
+  .form{padding:28px 20px}
+  .c-list div{grid-template-columns:1fr;gap:2px}
+  .demo-for{font-size:13px}.demo-for__more{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-for"><img src="assets/zakazchik.jpg" alt=""><span>Демо для <b>Михаила</b> по&nbsp;заказу «Сайт на&nbsp;тильде».<span class="demo-for__more"> Цены, сроки и&nbsp;примеры&nbsp;– условные, заменим на&nbsp;ваши</span></span></div>
+
+<header class="head" id="head">
+  <div class="wrap">
+    <a class="logo" href="#home" aria-label="FrameHouseHub, на главную">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#26292E"/><path d="M7 25V14l9-7 9 7v11" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M16 25v-8" stroke="#2F55D4" stroke-width="2.4"/></svg>
+      FrameHouse<span>Hub</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Разделы сайта">
+      <a href="#proekt" data-view="proekt">Проектирование</a>
+      <a href="#nadzor" data-view="nadzor">Строительный контроль</a>
+      <a href="#portfolio" data-view="proekt">Портфолио</a>
+      <a href="#razbor" data-view="nadzor">Разбор выездов</a>
+      <a href="#kontakty" data-view="kontakty">Контакты</a>
+      <button class="btn nav__cta" type="button" data-open-form>Обсудить проект</button>
+    </nav>
+    <button class="btn head__cta" type="button" data-open-form>Обсудить проект</button>
+    <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<!-- ГЛАВНАЯ -->
+<section class="view" id="view-home" aria-label="Главная">
+  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">FrameHouseHub&nbsp;– проектирование загородных домов и&nbsp;строительный контроль</h1>
+  <div class="split">
+    <a class="half" href="#proekt">
+      <img class="half__bg" src="assets/proekt.webp" alt="Каркасный дом с графитовой кровлей в поле">
+      <div class="half__axis"><i>А</i>направление</div>
+      <div class="dim" aria-hidden="true"><span>проект дома</span></div>
+      <h2>Проектирование загородных домов</h2>
+      <p>Продуманный проект под&nbsp;ваш&nbsp;участок и&nbsp;бюджет: от&nbsp;эскиза до&nbsp;рабочих чертежей, по&nbsp;которым строители не&nbsp;будут импровизировать.</p>
+      <span class="btn btn--light">Перейти к&nbsp;проектированию</span>
+    </a>
+    <a class="half" href="#nadzor">
+      <img class="half__bg" src="assets/nadzor.webp" alt="Инженер проверяет уровнем стойку каркаса">
+      <div class="half__axis"><i>Б</i>направление</div>
+      <div class="dim" aria-hidden="true"><span>контроль стройки</span></div>
+      <h2>Строительный контроль</h2>
+      <p>Проверяем каждый этап стройки по&nbsp;СП&nbsp;и&nbsp;СНиП, защищаем бюджет от&nbsp;брака и&nbsp;лишних работ в&nbsp;смете.</p>
+      <span class="btn btn--light">Перейти к&nbsp;технадзору</span>
+    </a>
+  </div>
+</section>
+
+<!-- ПРОЕКТИРОВАНИЕ -->
+<section class="view" id="view-proekt" aria-label="Проектирование">
+  <div class="intro">
+    <div class="intro__text">
+      <div class="crumb"><a href="#home">Главная</a> / Проектирование</div>
+      <h1>Проект дома, по&nbsp;которому удобно строить</h1>
+      <p>Начинаем с&nbsp;участка и&nbsp;вашего образа жизни, а&nbsp;не&nbsp;с&nbsp;картинки из&nbsp;каталога. Каждый узел прорисован, каждая позиция&nbsp;– в&nbsp;ведомости материалов, поэтому смета не&nbsp;растёт на&nbsp;стройке.</p>
+      <div class="intro__btns">
+        <a class="btn" href="#tarify-proekt">Смотреть тарифы</a>
+        <button class="btn btn--ghost" type="button" data-open-form data-dir="proekt">Получить консультацию</button>
+      </div>
+    </div>
+    <div class="intro__img"><img src="assets/proekt.webp" alt="Современный каркасный дом с большими окнами"></div>
+  </div>
+
+  <div class="sec" id="tarify-proekt">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>Тарифы на&nbsp;проектирование</h2>
+        <div><p>Выберите комплектацию: можно начать с&nbsp;эскиза и&nbsp;дозаказать остальные разделы позже, без&nbsp;переделок.</p><span class="note">Пример наполнения: цены и&nbsp;сроки заменим на&nbsp;ваши</span></span></div>
+      </div>
+      <div class="tariffs" style="--cols:4">
+        <article class="tariff">
+          <div class="tariff__code">ЭП</div>
+          <h3>Эскизный проект</h3>
+          <ul class="tariff__list"><li>Схема посадки дома на&nbsp;участке</li><li>Планировки этажей</li><li>Фасады в&nbsp;цвете</li><li>3D-визуализация</li></ul>
+          <dl class="tariff__meta"><div><dt>Срок</dt><dd>2–3&nbsp;недели</dd></div><div><dt>Стоимость</dt><dd class="tariff__price">от&nbsp;350&nbsp;₽/м²</dd></div></dl>
+          <button class="btn btn--ghost" type="button" data-open-form data-dir="proekt" data-topic="Тариф: Эскизный проект">Заказать расчёт</button>
+        </article>
+        <article class="tariff">
+          <div class="tariff__code">АР</div>
+          <h3>Архитектурные решения</h3>
+          <ul class="tariff__list"><li>Планы этажей с&nbsp;размерами</li><li>Разрезы и&nbsp;фасады</li><li>Ведомость отделки</li><li>Спецификация окон и&nbsp;дверей</li></ul>
+          <dl class="tariff__meta"><div><dt>Срок</dt><dd>3–4&nbsp;недели</dd></div><div><dt>Стоимость</dt><dd class="tariff__price">от&nbsp;700&nbsp;₽/м²</dd></div></dl>
+          <button class="btn btn--ghost" type="button" data-open-form data-dir="proekt" data-topic="Тариф: Архитектурные решения">Заказать расчёт</button>
+        </article>
+        <article class="tariff">
+          <div class="tariff__code">КР</div>
+          <h3>Конструктивные решения</h3>
+          <ul class="tariff__list"><li>Фундамент и&nbsp;его&nbsp;армирование</li><li>Каркас стен и&nbsp;перекрытий</li><li>Стропильная система</li><li>Ведомость пиломатериалов</li></ul>
+          <dl class="tariff__meta"><div><dt>Срок</dt><dd>3–4&nbsp;недели</dd></div><div><dt>Стоимость</dt><dd class="tariff__price">от&nbsp;800&nbsp;₽/м²</dd></div></dl>
+          <button class="btn btn--ghost" type="button" data-open-form data-dir="proekt" data-topic="Тариф: Конструктивные решения">Заказать расчёт</button>
+        </article>
+        <article class="tariff tariff--main">
+          <div class="tariff__code">АР&nbsp;+ КР&nbsp;+ ИС</div>
+          <h3>Полный проект</h3>
+          <ul class="tariff__list"><li>Архитектурный и&nbsp;конструктивный разделы</li><li>Схемы отопления, водоснабжения, электрики</li><li>Смета материалов</li><li>Авторские консультации на&nbsp;стройке</li></ul>
+          <dl class="tariff__meta"><div><dt>Срок</dt><dd>6–8&nbsp;недель</dd></div><div><dt>Стоимость</dt><dd class="tariff__price">от&nbsp;1&nbsp;500&nbsp;₽/м²</dd></div></dl>
+          <button class="btn" type="button" data-open-form data-dir="proekt" data-topic="Тариф: Полный проект">Заказать расчёт</button>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec--paper" id="portfolio">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>Портфолио</h2>
+        <div><p>Нажмите на&nbsp;проект, чтобы посмотреть визуализацию, планировку и&nbsp;характеристики.</p><span class="note">Пример карточек: подставим ваши объекты</span></div>
+      </div>
+      <div class="filters" role="group" aria-label="Фильтр проектов">
+        <button type="button" aria-pressed="true" data-filter="all">Все&nbsp;проекты</button>
+        <button type="button" aria-pressed="false" data-filter="1">Одноэтажные</button>
+        <button type="button" aria-pressed="false" data-filter="2">Двухэтажные</button>
+      </div>
+      <div class="works" id="works"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ТЕХНАДЗОР -->
+<section class="view" id="view-nadzor" aria-label="Строительный контроль">
+  <div class="intro">
+    <div class="intro__text">
+      <div class="crumb"><a href="#home">Главная</a> / Строительный контроль</div>
+      <h1>Технадзор за&nbsp;строительством частного дома</h1>
+      <ul class="gains">
+        <li>Находим брак до&nbsp;того, как&nbsp;его&nbsp;закроют отделкой и&nbsp;переделка станет дорогой.</li>
+        <li>Сверяем объёмы и&nbsp;материалы с&nbsp;актами, чтобы вы&nbsp;не&nbsp;платили за&nbsp;то, чего нет.</li>
+        <li>После каждого выезда&nbsp;– отчёт с&nbsp;фото и&nbsp;ссылками на&nbsp;нормативы, его&nbsp;можно предъявить подрядчику.</li>
+      </ul>
+      <div class="intro__btns">
+        <button class="btn" type="button" data-open-form data-dir="nadzor" data-topic="Вызов эксперта">Вызвать эксперта</button>
+        <a class="btn btn--ghost" href="#razbor">Примеры проверок</a>
+      </div>
+    </div>
+    <div class="intro__img"><img src="assets/nadzor.webp" alt="Инженер технадзора проверяет каркас дома"></div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>Форматы работы</h2>
+        <div><p>Один выезд на&nbsp;важный этап, сопровождение всей стройки или&nbsp;проверка готового дома перед покупкой.</p><span class="note">Пример наполнения: цены заменим на&nbsp;ваши</span></span></div>
+      </div>
+      <div class="tariffs" style="--cols:3">
+        <article class="tariff">
+          <div class="tariff__code">1&nbsp;выезд</div>
+          <h3>Приёмка этапа</h3>
+          <ul class="tariff__list"><li>Соответствие работ проекту</li><li>Геометрия, узлы, крепёж</li><li>Оборудование: лазерный нивелир, влагомер, рулетка-дальномер</li><li>Отчёт с&nbsp;фото и&nbsp;нормативами за&nbsp;24&nbsp;часа</li></ul>
+          <dl class="tariff__meta"><div><dt>Стоимость</dt><dd class="tariff__price">от&nbsp;7&nbsp;000&nbsp;₽</dd></div></dl>
+          <button class="btn btn--ghost" type="button" data-open-form data-dir="nadzor" data-topic="Формат: Приёмка этапа">Оставить заявку</button>
+        </article>
+        <article class="tariff tariff--main">
+          <div class="tariff__code">вся&nbsp;стройка</div>
+          <h3>Комплексное сопровождение</h3>
+          <ul class="tariff__list"><li>Выезды на&nbsp;все&nbsp;скрытые работы</li><li>Проверка смет и&nbsp;актов подрядчика</li><li>Тепловизор, влагомер, нивелир, толщиномер</li><li>Сводный отчёт по&nbsp;каждому этапу</li></ul>
+          <dl class="tariff__meta"><div><dt>Стоимость</dt><dd class="tariff__price">от&nbsp;45&nbsp;000&nbsp;₽/мес</dd></div></dl>
+          <button class="btn" type="button" data-open-form data-dir="nadzor" data-topic="Формат: Комплексное сопровождение">Оставить заявку</button>
+        </article>
+        <article class="tariff">
+          <div class="tariff__code">готовый дом</div>
+          <h3>Экспертиза перед покупкой</h3>
+          <ul class="tariff__list"><li>Фундамент, стены, кровля, инженерия</li><li>Скрытые протечки и&nbsp;мостики холода</li><li>Тепловизор и&nbsp;влагомер древесины</li><li>Заключение и&nbsp;примерная стоимость устранения</li></ul>
+          <dl class="tariff__meta"><div><dt>Стоимость</dt><dd class="tariff__price">от&nbsp;15&nbsp;000&nbsp;₽</dd></div></dl>
+          <button class="btn btn--ghost" type="button" data-open-form data-dir="nadzor" data-topic="Формат: Экспертиза перед покупкой">Оставить заявку</button>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec sec--paper" id="razbor">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2>Разбор выездов</h2>
+        <div><p>Что&nbsp;нашли на&nbsp;объекте, какие нормы нарушены и&nbsp;чем&nbsp;всё&nbsp;закончилось для&nbsp;заказчика.</p><span class="note">Пример структуры разбора: подставим ваши выезды</span></div>
+      </div>
+      <div class="cases">
+        <article class="case">
+          <div class="case__img">
+            <img src="assets/defekt-1.webp" alt="Утеплитель в каркасной стене с зазорами у стоек">
+            <span class="mark" style="left:23%;top:44%;width:17%;height:18%"><b>1</b></span>
+            <span class="mark" style="left:52%;top:61%;width:16%;height:18%"><b>2</b></span>
+          </div>
+          <div class="case__body">
+            <div class="case__tag">Каркасный дом&nbsp;120&nbsp;м², приёмка утепления стен</div>
+            <h3>Утеплитель с&nbsp;зазорами и&nbsp;рваная пароизоляция</h3>
+            <dl>
+              <dt>Дефекты</dt><dd><ol><li>Зазоры между утеплителем и&nbsp;стойками до&nbsp;15&nbsp;мм</li><li>Разрывы и&nbsp;непроклеенные стыки пароизоляции</li></ol></dd>
+              <dt>Нормативы</dt><dd><span class="norm">СП&nbsp;31-105-2002, СП&nbsp;50.13330.2012</span></dd>
+              <dt>Рекомендации</dt><dd>Доуплотнить утеплитель, проклеить стыки лентой, повторная приёмка до&nbsp;обшивки стен.</dd>
+              <dd class="case__result">Итог: подрядчик исправил за&nbsp;свой счёт до&nbsp;того, как&nbsp;стены зашили.</dd>
+            </dl>
+          </div>
+        </article>
+        <article class="case">
+          <div class="case__img">
+            <img src="assets/defekt-2.webp" alt="Раковины в бетоне ленточного фундамента">
+            <span class="mark" style="left:38%;top:46%;width:28%;height:30%"><b>1</b></span>
+            <span class="mark" style="left:82%;top:58%;width:14%;height:18%"><b>2</b></span>
+          </div>
+          <div class="case__body">
+            <div class="case__tag">Ленточный фундамент, приёмка после распалубки</div>
+            <h3>Раковины в&nbsp;бетоне и&nbsp;оголённая арматура</h3>
+            <dl>
+              <dt>Дефекты</dt><dd><ol><li>Раковины и&nbsp;пустоты на&nbsp;поверхности ленты</li><li>Арматура без&nbsp;защитного слоя бетона</li></ol></dd>
+              <dt>Нормативы</dt><dd><span class="norm">СП&nbsp;70.13330.2012, СП&nbsp;63.13330.2018</span></dd>
+              <dt>Рекомендации</dt><dd>Расчистить дефектные участки, восстановить защитный слой ремонтным составом, обработать арматуру.</dd>
+              <dd class="case__result">Итог: этап не&nbsp;приняли и&nbsp;не&nbsp;оплатили, пока дефекты не&nbsp;устранили.</dd>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section class="view" id="view-kontakty" aria-label="Контакты">
+  <div class="sec">
+    <div class="wrap contacts">
+      <div>
+        <div class="crumb"><a href="#home">Главная</a> / Контакты</div>
+        <h1>Контакты</h1>
+        <p class="muted">Расскажите о&nbsp;задаче: мы&nbsp;ответим и&nbsp;предложим, с&nbsp;чего начать.</p>
+        <dl class="c-list">
+          <div><dt>Телефон</dt><dd><span class="slot">+7 (___) ___-__-__</span></dd></div>
+          <div><dt>Почта</dt><dd><span class="slot">почта бюро</span></dd></div>
+          <div><dt>Мессенджеры</dt><dd><div class="msgs"><a href="#kontakty">Telegram</a><a href="#kontakty">WhatsApp</a></div></dd></div>
+          <div><dt>Регион работы</dt><dd><span class="slot">ваш&nbsp;регион</span></dd></div>
+          <div><dt>Приём заявок</dt><dd><span class="slot">график работы</span></dd></div>
+        </dl>
+      </div>
+      <form class="form" data-form>
+        <h2>Оставить заявку</h2>
+        <div class="field"><label for="c-name">Имя</label><input id="c-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="c-phone">Телефон</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" required></div>
+        <fieldset class="field"><legend>Направление</legend>
+          <div class="seg"><label><input type="radio" name="dir" value="proekt" checked>Проектирование</label><label><input type="radio" name="dir" value="nadzor">Строительный контроль</label></div>
+        </fieldset>
+        <div class="field"><label for="c-msg">Комментарий</label><textarea id="c-msg" name="msg"></textarea></div>
+        <label class="agree"><input type="checkbox" required>Согласен на&nbsp;обработку персональных данных по&nbsp;политике конфиденциальности</label>
+        <button class="btn" type="submit">Отправить заявку</button>
+        <p class="form__ok" role="status">Это&nbsp;демо: заявка никуда не&nbsp;ушла. На&nbsp;готовом сайте она&nbsp;придёт вам&nbsp;в&nbsp;Telegram и&nbsp;на&nbsp;почту.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div>
+        <a class="logo" href="#home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#fff"/><path d="M7 25V14l9-7 9 7v11" fill="none" stroke="#26292E" stroke-width="2.4"/><path d="M16 25v-8" stroke="#2F55D4" stroke-width="2.4"/></svg>FrameHouse<span>Hub</span></a>
+        <div class="soc">
+          <a href="#home" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.5 3.6 2.8 10.8c-1.3.5-1.2 1.3-.2 1.6l4.8 1.5 1.8 5.6c.2.7.4.9.9.9.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.3-1.5zM8.6 13.6l9.7-6.1c.5-.3.9-.1.5.2l-8 7.3-.3 3.4-1.9-4.8z"/></svg></a>
+          <a href="#home" aria-label="ВКонтакте"><svg viewBox="0 0 24 24"><path d="M12.8 17.5C6.6 17.5 3.1 13.3 3 6.3h3c.1 5.1 2.4 7.3 4.2 7.7V6.3h2.9v4.4c1.8-.2 3.6-2.2 4.2-4.4h2.8c-.5 2.7-2.4 4.7-3.8 5.5 1.4.7 3.6 2.4 4.5 5.7h-3.1c-.7-2.2-2.4-3.9-4.6-4.1v4.1h-.3z"/></svg></a>
+          <a href="#home" aria-label="Rutube"><svg viewBox="0 0 24 24"><path d="M4 5h11.5C18 5 19.5 6.6 19.5 9s-1.3 3.6-3 3.9L20 19h-3.6l-3.2-5.9H7.3V19H4V5zm3.3 3v2.3h7.6c.9 0 1.3-.4 1.3-1.15S15.8 8 14.9 8H7.3z"/></svg></a>
+          <a href="#home" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2.5a9.5 9.5 0 0 0-8.2 14.3L2.5 21.5l4.8-1.3A9.5 9.5 0 1 0 12 2.5zm5.5 13.4c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.7-.1 1.3z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Реквизиты</h4>
+        <ul><li>ООО&nbsp;«<span class="slot">название</span>»</li><li>ИНН <span class="slot">__________</span></li><li>ОГРН <span class="slot">_____________</span></li></ul>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <ul><li><a href="#home">Политика конфиденциальности</a></li><li><a href="#home">Согласие на&nbsp;обработку персональных данных</a></li><li><a href="#home">Договор-оферта</a></li></ul>
+      </div>
+    </div>
+    <div class="foot__bottom"><span>© 2026 FrameHouseHub. Проектирование и&nbsp;строительный контроль</span><span>Демо-версия сайта</span></div>
+  </div>
+</footer>
+
+<!-- поп-ап заявки -->
+<dialog id="dlg-form" aria-label="Обсудить проект">
+  <form class="form" data-form method="dialog">
+    <button class="x" type="button" aria-label="Закрыть" data-close>×</button>
+    <h2>Обсудить проект</h2>
+    <p class="muted" id="dlg-topic">Оставьте телефон, перезвоним и&nbsp;ответим на&nbsp;вопросы.</p>
+    <div class="field"><label for="d-name">Имя</label><input id="d-name" name="name" autocomplete="name" required></div>
+    <div class="field"><label for="d-phone">Телефон</label><input id="d-phone" name="phone" type="tel" autocomplete="tel" required></div>
+    <fieldset class="field"><legend>Направление</legend>
+      <div class="seg"><label><input type="radio" name="dir" value="proekt" checked>Проектирование</label><label><input type="radio" name="dir" value="nadzor">Строительный контроль</label></div>
+    </fieldset>
+    <label class="agree"><input type="checkbox" required>Согласен на&nbsp;обработку персональных данных по&nbsp;политике конфиденциальности</label>
+    <button class="btn" type="submit">Отправить заявку</button>
+    <p class="form__ok" role="status">Это&nbsp;демо: заявка никуда не&nbsp;ушла. На&nbsp;готовом сайте она&nbsp;придёт вам&nbsp;в&nbsp;Telegram и&nbsp;на&nbsp;почту.</p>
+  </form>
+</dialog>
+
+<!-- карточка проекта -->
+<dialog id="dlg-proj" class="proj" aria-label="Проект дома">
+  <div class="proj__box">
+    <button class="x" type="button" aria-label="Закрыть" data-close>×</button>
+    <div class="proj__media">
+      <div class="proj__stage" id="proj-stage"></div>
+      <div class="proj__tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-tab="render">Визуализация</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="plan">План этажа</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="facade">Фасад</button>
+      </div>
+    </div>
+    <div class="proj__info">
+      <h3 id="proj-title"></h3>
+      <dl id="proj-specs"></dl>
+      <button class="btn" type="button" id="proj-like">Хочу похожий проект</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var NB = ' ';
+  var head = document.getElementById("head"), burger = document.getElementById("burger");
+  var works = [
+    {id:'dom-1', title:'Дом «Сосновый»', floors:1, img:'assets/dom-1.webp', specs:[['Площадь','118 м²'],['Габариты','8,4 × 15,6 м'],['Этажность','1 этаж'],['Технология','каркас, барнхаус']]},
+    {id:'dom-2', title:'Дом «Консоль»', floors:2, img:'assets/dom-2.webp', specs:[['Площадь','186 м²'],['Габариты','10,2 × 11,4 м'],['Этажность','2 этажа'],['Технология','каркас, плоская кровля']]},
+    {id:'dom-3', title:'Дом «Терраса»', floors:1, img:'assets/dom-3.webp', specs:[['Площадь','96 м²'],['Габариты','8 × 13,2 м'],['Этажность','1 этаж'],['Технология','каркас, терраса 32 м²']]}
+  ];
+  var box = document.getElementById('works');
+  works.forEach(function(w){
+    var b = document.createElement('button');
+    b.type='button'; b.className='work'; b.dataset.floors=w.floors;
+    b.innerHTML = '<div class="work__img"><img src="'+w.img+'" alt="'+w.title+'" loading="lazy"></div>'+
+      '<div class="work__cap"><h3>'+w.title+'</h3><span>'+w.specs[0][1]+' · '+w.specs[2][1]+'</span></div>';
+    b.addEventListener('click', function(){ openProj(w); });
+    box.appendChild(b);
+  });
+  document.querySelectorAll('[data-filter]').forEach(function(f){
+    f.addEventListener('click', function(){
+      document.querySelectorAll('[data-filter]').forEach(function(x){ x.setAttribute('aria-pressed', x===f); });
+      box.querySelectorAll('.work').forEach(function(w){ w.hidden = !(f.dataset.filter==='all' || f.dataset.filter===w.dataset.floors); });
+    });
+  });
+
+  var PLAN = '<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="object-fit:contain;background:#fff"><g fill="none" stroke="#26292E" stroke-width="4"><rect x="40" y="40" width="320" height="200"/><path d="M180 40v110M180 190v50M40 150h90M170 150h10M260 40v80M260 160v80M260 120h100"/></g><g fill="none" stroke="#2F55D4" stroke-width="1.5"><path d="M40 270h320M40 264v12M360 264v12M180 264v12M260 264v12"/></g><g font-family="IBM Plex Mono,monospace" font-size="11" fill="#646A72"><text x="98" y="262">6 300</text><text x="205" y="262">3 600</text><text x="297" y="262">4 500</text><text x="80" y="100">гостиная</text><text x="196" y="100">кухня</text><text x="285" y="85">спальня</text><text x="285" y="205">спальня</text><text x="70" y="205">терраса</text><text x="196" y="215">с/у</text></g></svg>';
+  var FACADE = '<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="object-fit:contain;background:#fff"><g fill="none" stroke="#26292E" stroke-width="3"><path d="M60 230V130L200 50l140 80v100z"/><rect x="95" y="150" width="60" height="80"/><rect x="180" y="150" width="40" height="50"/><rect x="245" y="150" width="60" height="50"/></g><path d="M30 230h340" stroke="#26292E" stroke-width="1.5"/><g fill="none" stroke="#2F55D4" stroke-width="1.5"><path d="M375 230V50M369 230h12M369 50h12"/></g><text x="380" y="145" font-family="IBM Plex Mono,monospace" font-size="11" fill="#646A72" transform="rotate(-90 380 145)">+6.400</text></svg>';
+  var current;
+  var dp = document.getElementById('dlg-proj'), stage = document.getElementById('proj-stage');
+  function show(tab){
+    document.querySelectorAll('[data-tab]').forEach(function(t){ t.setAttribute('aria-selected', t.dataset.tab===tab); });
+    stage.innerHTML = tab==='render' ? '<img src="'+current.img+'" alt="'+current.title+'">' : tab==='plan' ? PLAN : FACADE;
+  }
+  function openProj(w){
+    current = w;
+    document.getElementById('proj-title').textContent = w.title;
+    document.getElementById('proj-specs').innerHTML = w.specs.map(function(s){ return '<div><dt>'+s[0]+'</dt><dd>'+s[1]+'</dd></div>'; }).join('');
+    show('render'); dp.showModal();
+  }
+  document.querySelectorAll('[data-tab]').forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.tab); }); });
+  document.getElementById('proj-like').addEventListener('click', function(){
+    dp.close(); openForm('proekt', 'Хочу проект, похожий на'+NB+current.title);
+  });
+
+  var df = document.getElementById('dlg-form');
+  function openForm(dir, topic){
+    var f = df.querySelector('form'); f.classList.remove('is-sent'); f.reset();
+    var r = f.querySelector('input[name="dir"][value="'+(dir||'proekt')+'"]'); if(r) r.checked = true;
+    document.getElementById('dlg-topic').textContent = topic || 'Оставьте телефон, перезвоним и'+NB+'ответим на'+NB+'вопросы.';
+    df.showModal();
+  }
+  document.querySelectorAll('[data-open-form]').forEach(function(b){
+    b.addEventListener('click', function(){ closeMenu(); openForm(b.dataset.dir, b.dataset.topic); });
+  });
+  document.querySelectorAll('[data-close]').forEach(function(b){ b.addEventListener('click', function(){ b.closest('dialog').close(); }); });
+  document.querySelectorAll('dialog').forEach(function(d){ d.addEventListener('click', function(e){ if(e.target===d) d.close(); }); });
+  document.querySelectorAll('[data-form]').forEach(function(f){
+    f.addEventListener('submit', function(e){ e.preventDefault(); f.classList.add('is-sent'); });
+  });
+
+  // страницы
+  var map = {home:'home', proekt:'proekt', 'tarify-proekt':'proekt', portfolio:'proekt', nadzor:'nadzor', razbor:'nadzor', kontakty:'kontakty'};
+  var titles = {home:'FrameHouseHub – проектирование домов и технадзор', proekt:'Проектирование загородных домов – FrameHouseHub', nadzor:'Строительный контроль – FrameHouseHub', kontakty:'Контакты – FrameHouseHub'};
+  function route(){
+    var h = (location.hash||'#home').slice(1), v = map[h] || 'home';
+    document.querySelectorAll('.view').forEach(function(s){ s.classList.toggle('is-on', s.id==='view-'+v); });
+    document.querySelectorAll('.nav a').forEach(function(a){ var t=a.getAttribute('href').slice(1); a.toggleAttribute('aria-current', t===h || (t===v && h===v)); if(a.hasAttribute('aria-current')) a.setAttribute('aria-current','page'); });
+    document.title = titles[v];
+    var el = h!==v && document.getElementById(h);
+    if(el){ requestAnimationFrame(function(){ el.scrollIntoView(); }); } else { window.scrollTo(0,0); }
+    closeMenu();
+  }
+  window.addEventListener('hashchange', route); route();
+
+  function closeMenu(){ head.classList.remove('is-open'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){ var o = head.classList.toggle('is-open'); burger.setAttribute('aria-expanded', o); });
+})();
+</script>
+</body>
+</html>
